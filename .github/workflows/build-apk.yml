@@ -30,6 +30,7 @@ jobs:
       - name: Generate Android platform files
         run: |
           flutter create --platforms=android --org com.flousi.app --project-name flousi /tmp/flousi_android_shell
+          rm -rf ./android
           cp -a /tmp/flousi_android_shell/android ./android
 
       - name: Get dependencies
