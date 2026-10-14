@@ -28,3 +28,8 @@ You can also run it manually from Actions → Build FLOUSI APK → Run workflow.
 ## Important limitations
 
 This makes the current prototype buildable as an Android APK; it does not add cloud sync, authentication, or a production backend. Prototype data is still stored locally in WebView storage, and exchange rates are illustrative fixed values. Do not use it to store sensitive financial information yet.
+
+
+### إصلاح خطأ Android v1 embedding
+
+خطوة البناء تحذف مجلد `android` القديم وتولّد مجلد Android حديثًا بواسطة إصدار Flutter الحالي قبل البناء، حتى لا تبقى ملفات Android قديمة تستخدم embedding المحذوف. لا تحذف ملفات الويب أو بيانات التطبيق.
