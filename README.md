@@ -1,20 +1,30 @@
-# FLOUSI — Phase 1 prototype
+# FLOUSI — Complete Android build package
 
-A responsive, bilingual (Arabic/English) personal-finance web prototype with light/dark themes, display-currency conversion, transactions, spending budgets, savings goals, and a dashboard.
+This package preserves the original FLOUSI prototype and adds the missing Flutter project configuration needed to build an Android APK in GitHub Actions.
 
-## Run it
+## Fix for the previous build error
 
-1. Download and extract `FLOUSI-phase1.zip`.
-2. Open `index.html` in a modern browser, or serve this folder with any static web server.
-3. Try the theme toggle, language toggle, currency selector, add transaction, add goal, search/filter, and reset demo controls.
+The old workflow ran `flutter pub get` in a repository without `pubspec.yaml`, so Flutter reported `Expected to find project root in current working directory`. This package includes `pubspec.yaml` and `lib/main.dart`, bundles the web prototype as Flutter assets, and creates Android platform files before resolving dependencies.
 
-No build step or dependencies are required. Google Fonts are optional; the browser falls back to system fonts when offline.
+## Upload to GitHub
 
-## Important prototype limits
+1. Download and extract this ZIP.
+2. Upload the **contents** of the `FLOUSI-Android-Complete` folder to the root of `https://github.com/iiredlx/Flousi` (not the enclosing folder itself). Replace the old workflow if prompted.
+3. Commit the changes to `main`.
+4. Open the repository's **Actions** tab and select **Build FLOUSI APK**.
+5. When the workflow succeeds, open the run and download the `FLOUSI-Android-APK` artifact. Extract it to get `app-release.apk`.
 
-- This phase is a front-end prototype, not a production financial product.
-- Data is stored in this browser's `localStorage`; it is not encrypted, synced, or backed up. Do not enter real sensitive financial data.
-- Currency conversion uses illustrative hard-coded rates in `app.js`; it is not a live exchange-rate feed and must not be used for financial decisions.
-- There is no authentication, multi-device sync, bank connection, server API, or account recovery yet.
+You can also run it manually from Actions → Build FLOUSI APK → Run workflow.
 
-See `FLOUSI_SPEC.md` for product scope, page inventory, data model, security rules, phased delivery, and acceptance criteria. `schema.sql` is a proposed PostgreSQL/Supabase starting schema for a later backend phase; it is not wired into this prototype.
+## Contents
+
+- `pubspec.yaml`: Flutter package configuration and WebView dependency.
+- `lib/main.dart`: Android app shell that displays the original FLOUSI UI.
+- `assets/web/`: copies of the original HTML, CSS, and JavaScript, bundled into the APK.
+- `.github/workflows/build-apk.yml`: automated APK build and artifact upload.
+- `index.html`, `styles.css`, `app.js`: original editable web prototype.
+- `FLOUSI_SPEC.md`, `schema.sql`: original product specification and proposed database schema.
+
+## Important limitations
+
+This makes the current prototype buildable as an Android APK; it does not add cloud sync, authentication, or a production backend. Prototype data is still stored locally in WebView storage, and exchange rates are illustrative fixed values. Do not use it to store sensitive financial information yet.
